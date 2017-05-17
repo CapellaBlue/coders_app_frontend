@@ -3,11 +3,12 @@ console.log("frontend app app.js");
 var app = angular.module('politicalBoard', []);
 
 app.controller('mainController', ['$http', function($http){
-    this.message = "angular works!";
+    // this.message = "angular works!";
     this.posts = [];
     this.viewPost = {}
     this.postComments = [];
     this.viewOnePost = false;
+    this.postFormdata = {};
 
     // GET All Posts
     $http({
@@ -36,6 +37,18 @@ app.controller('mainController', ['$http', function($http){
         this.viewOnePost = true;
       }.bind(this));
 
+    };
+    this.createPost = function(){
+        console.log("inside createPost: ", this.postFormdata);
+        $http({
+            method: 'POST',
+            url: 'http://localhost:3000/posts',
+            data: this.postFormdata
+        }).then(function(result){
+            console.log('Data from server: ', result);
+            this.postFormdata = {}
+            this.posts.unshift(result.data);
+        }.bind(this));
     };
 
 
