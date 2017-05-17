@@ -4,6 +4,7 @@ var app = angular.module('politicalBoard', []);
 
 app.controller('mainController', ['$http', function($http){
     this.message = "angular works!";
+
     $http({
         method: 'GET',
         url: 'http://localhost:3000/posts'
