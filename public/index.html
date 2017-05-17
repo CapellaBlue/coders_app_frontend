@@ -11,5 +11,30 @@
         <h1>Hello, World!</h1>
         {{2+2}}
         {{ctrl.message}}
+
+        <div ng-hide="ctrl.viewOnePost" class="">
+          <div ng-repeat="post in ctrl.posts">
+            <h3 ng-click="ctrl.showPostComments(post.id, $index)">{{post.title}}</h3>
+            <!-- <p>{{post.content}}</p> -->
+            <small>By {{post.author}}</small>
+          </div>
+
+        </div>
+
+        <div ng-show="ctrl.viewOnePost" class="">
+
+          <div class="">
+            <h3>{{ctrl.viewPost.title}}</h3>
+            <p>{{ctrl.viewPost.content}}</p>
+            <small>{{ctrl.viewPost.author}}</small>
+          </div>
+
+          <div ng-repeat="comment in ctrl.postComments" class="">
+            <p>{{comment.text}}</p>
+            <small>By {{comment.author}}</small>
+          </div>
+
+        </div
+
     </body>
 </html>
