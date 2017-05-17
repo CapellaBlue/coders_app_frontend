@@ -29,7 +29,7 @@ app.controller('mainController', ['$http', function($http){
           headers: {
             "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
           },
-          url: 'http://localhost:3000/posts/'+post_id+'comments'
+          url: 'http://localhost:3000/posts/'+post_id
       }).then(function(response){
         console.log(response.data.comments);
         this.postComments = response.data.comments;
