@@ -1,3 +1,54 @@
 body {
-    background: thistle;
+    background: #838383;
+}
+
+.jumbotron {
+
+}
+
+#jumbo-container {
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+
+.posts {
+    background : #EEEEEE;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.row {
+    background : #dbdbdb;
+    border-radius: 5px;
+}
+
+
+.posts h5 {
+    margin: 0;
+}
+
+.form-horizontal {
+    background : #EEEEEE;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+#hard-conservative {
+    border-color: #B22234;
+}
+#hard-liberal {
+    border-color: #A9B7C0;
+}
+#soft-conservative {
+    border-color: #D27E87;
+}
+#soft-liberal {
+    border-color: #3C3B6E;
+}
+#centrist {
+    border-color: #785d90;
+}
+#independent {
+    border-color: #9c8914;
 }
