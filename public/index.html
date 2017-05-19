@@ -1,17 +1,122 @@
 <!DOCTYPE html>
 <html ng-app='politicalBoard'>
-    <head>
-	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-        <script type="text/javascript" src="app.js">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 
-        </script>
-	<link rel="stylesheet" href="style.css">
-        <meta charset="utf-8">
-        <title>Index</title>
-    </head>
-    <body ng-controller="mainController as ctrl">
-        <h1>Hello, World!</h1>
-        {{2+2}}
-        {{ctrl.message}}
-    </body>
+    <title>Politik</title>
+</head>
+<body ng-controller="mainController as ctrl" >
+    <div class="navbar-wrapper">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">TypePolitik</a>
+            </div>
+        </div>
+
+    </div>
+    <main class="container">
+        <div ng-show="ctrl.viewOnePost" class="row">
+            <div class="col-sm-12">
+                <h3>{{ctrl.viewPost.title}}</h3>
+                <p>{{ctrl.viewPost.content}}</p>
+                <small>{{ctrl.viewPost.author}}</small>
+            </div>
+            <div class="col-sm-12">
+                <div ng-repeat="comment in ctrl.postComments" class="row">
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col-sm-10">
+                        <p>{{comment.text}}</p>
+                        <small>By {{comment.author}}</small>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+                    <form ng-submit="ctrl.createComment(ctrl.viewOnePost.id)" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="4"ng-model="ctrl.commentFormdata.text" placeholder="Comment"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input ng-model="ctrl.commentFormdata.author" type="text" placeholder="Author">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <select ng-model="ctrl.commentFormdata.political_affiliation" ng-options="x for x in ctrl.affiliation">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2 col-sm-10">
+                                <input type="submit" placeholder="Submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div ng-hide="ctrl.viewOnePost" class="posts col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <div ng-repeat="post in ctrl.posts">
+                    <div class="{{post.political_affiliation}}" id="single-post">
+                        
+                        <h5 ng-click="ctrl.showPostComments(post.id, $index)">{{post.title}}</h5>
+                        <small>By {{post.author}}</small>
+
+                        <!-- <h5 ng-click="ctrl.showPostContent(post.id)">{{post.title}}</h5>
+                        <small>By {{post.author}}</small>
+                        <p ng-show="ctrl.showContent">{{post.content}}</p>
+                        <button ng-show="ctrl.showContent" ng-click="ctrl.showPostComments(post.id, $index)">Comment</button> -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div ng-hide="ctrl.viewOnePost" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <form ng-submit="ctrl.createPost()" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <input ng-model="ctrl.postFormdata.title" type="text" placeholder="Title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <textarea class="form-control" rows="4"ng-model="ctrl.postFormdata.content" placeholder="Content"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <input ng-model="ctrl.postFormdata.author" type="text" placeholder="Author">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <select ng-model="ctrl.postFormdata.political_affiliation" ng-options="x for x in ctrl.affiliation">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 col-sm-10">
+                            <input type="submit" placeholder="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+<footer></footer>
+
+</body>
 </html>
