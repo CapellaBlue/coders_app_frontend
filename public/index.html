@@ -19,8 +19,6 @@
 
     </div>
     <main class="container">
-
-
         <div ng-show="ctrl.viewOnePost" class="row">
             <div class="col-sm-12">
                 <h3>{{ctrl.viewPost.title}}</h3>
@@ -37,25 +35,52 @@
                         <small>By {{comment.author}}</small>
                     </div>
                 </div>
-                <form class="comments-form">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                </form>
+
+                    <form ng-submit="ctrl.createComment(ctrl.id)" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="4"ng-model="ctrl.commentFormdata.text" placeholder="Comment"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input ng-model="ctrl.commentFormdata.author" type="text" placeholder="Author">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <select ng-model="ctrl.commentFormdata.political_affiliation" ng-options="x for x in ctrl.affiliation">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2 col-sm-10">
+                                <input type="submit" placeholder="Submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="row">
             <div ng-hide="ctrl.viewOnePost" class="posts col-xs-7 col-sm-7 col-md-7 col-lg-7">
                 <div ng-repeat="post in ctrl.posts">
                     <div class="{{post.political_affiliation}}" id="single-post">
-
                         <h5 ng-click="ctrl.showPostComments(post.id, $index)">{{post.title}}</h5>
-                        <!-- <p>{{post.content}}</p> -->
                         <small>By {{post.author}}</small>
+
+                        <!-- <h5 ng-click="ctrl.showPostContent(post.id)">{{post.title}}</h5>
+                        <small>By {{post.author}}</small>
+                        <p ng-show="ctrl.showContent">{{post.content}}</p>
+                        <button ng-show="ctrl.showContent" ng-click="ctrl.showPostComments(post.id, $index)">Comment</button> -->
+
                     </div>
                 </div>
             </div>
 
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-
+            <div ng-hide="ctrl.viewOnePost" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <form ng-submit="ctrl.createPost()" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-sm-4">
@@ -88,12 +113,7 @@
             </div>
         </div>
     </div>
-
-
 </div>
-
-
-
 </main>
 <footer></footer>
 

@@ -42,6 +42,7 @@ body {
 .form-horizontal {
     background : #EEEEEE;
     border-top: .3px solid darkgray;
+    border-bottom: .3px solid darkgray;
     padding: 4px;
     margin: 0 2px;
 }
