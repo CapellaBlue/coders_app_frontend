@@ -22,8 +22,9 @@ app.controller('mainController', ['$http', function($http){
         },
         url: 'http://localhost:3000/posts'
     }).then(function(response){
-        console.log(response.data);
+        ;
         this.posts = response.data;
+        
         for (var i = 0; i < response.data.length; i++) {
             var aff = response.data[i].political_affiliation;
 
@@ -40,8 +41,8 @@ app.controller('mainController', ['$http', function($http){
             } else if(aff == "Independent"){
                 response.data[i].political_affiliation = "independent";
             };
-            // console.log(aff);
-            // console.log(response.data[i].political_affiliation);
+            console.log(aff);
+            console.log(response.data[i].political_affiliation);
         };
     }.bind(this));
 
