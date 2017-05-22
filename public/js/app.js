@@ -71,6 +71,42 @@ console.log("frontend app app.js");
                 };
             };
         }.bind(this));
+        //get posts in form of a function
+        this.reloadPosts = function(){
+            $http({
+                method: 'GET',
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                },
+                // url: 'https://typepolitik99.herokuapp.com/posts'
+                url: 'http://localhost:3000/posts'
+            }).then(function(response){
+                this.posts = response.data;
+                console.log('get all posts',response.data);
+                for (var i = 0; i < response.data.length; i++) {
+                    var aff = response.data[i].political_affiliation;
+                    if(aff == "Hard Right"){
+                        this.hardRight.push(response.data[i]);
+                        response.data[i].political_affiliation = "hard-right";
+                    } else if(aff == "Soft Right"){
+                        this.softRight.push(response.data[i]);
+                        response.data[i].political_affiliation = "soft-right";
+                    } else if(aff == "Hard Left"){
+                        this.hardLeft.push(response.data[i]);
+                        response.data[i].political_affiliation = "hard-left";
+                    } else if(aff == "Soft Left"){
+                        this.softLeft.push(response.data[i]);
+                        response.data[i].political_affiliation = "soft-left";
+                    } else if(aff == "Centrist"){
+                        this.centrist.push(response.data[i]);
+                        response.data[i].political_affiliation = "centrist";
+                    } else if(aff == "Independent"){
+                        this.independent.push(response.data[i]);
+                        response.data[i].political_affiliation = "independent";
+                    };
+                };
+            }.bind(this));
+        };
 
         // See one Post and its Comments
         this.showPostComments = function(post_id, ind, aff){
@@ -334,8 +370,9 @@ console.log("frontend app app.js");
                     hardRightLikes: (this.posts[ind].hardRightLikes + 1)
                 }
             }).then(function(response){
-                console.log(response.data.likes);
-                console.log(response.data.hardRightLikes);
+                console.log('like total: ',response.data.likes);
+                console.log('hard right likes: ', response.data.hardRightLikes);
+                this.reloadPosts();
             }.bind(this));
         };
         this.sRLikeThis = function(ind, id){
@@ -350,8 +387,9 @@ console.log("frontend app app.js");
                     softRightLikes: (this.posts[ind].softRightLikes + 1)
                 }
             }).then(function(response){
-                console.log(response.data.likes);
-                console.log(response.data.softRightLikes);
+                console.log('like total: ',response.data.likes);
+                console.log("soft right likes: ",response.data.softRightLikes);
+                this.reloadPosts();
             }.bind(this));
         };
         this.cLikeThis = function(ind, id){
@@ -364,8 +402,9 @@ console.log("frontend app app.js");
                     centristLikes: (this.posts[ind].centristLikes + 1)
                 }
             }).then(function(response){
-                console.log(response.data.likes);
-                console.log(response.data.centristLikes);
+                console.log('like total: ',response.data.likes);
+                console.log("centrist likes: ",response.data.centristLikes);
+                this.reloadPosts();
             }.bind(this));
         };
         this.sLLikeThis = function(ind, id){
@@ -378,8 +417,9 @@ console.log("frontend app app.js");
                     softLeftLikes: (this.posts[ind].softLeftLikes + 1)
                 }
             }).then(function(response){
-                console.log(response.data.likes);
-                console.log(response.data.softLeftLikes);
+                console.log('like total: ',response.data.likes);
+                console.log("soft left likes: ",response.data.softLeftLikes);
+                this.reloadPosts();
             }.bind(this));
         };
         this.hLLikeThis = function(ind, id){
@@ -392,8 +432,9 @@ console.log("frontend app app.js");
                     hardLeftLikes: (this.posts[ind].hardLeftLikes + 1)
                 }
             }).then(function(response){
-                console.log(response.data.likes);
-                console.log(response.data.hardLeftLikes);
+                console.log('like total: ',response.data.likes);
+                console.log("hard left likes: ",response.data.hardLeftLikes);
+                this.reloadPosts();
             }.bind(this));
         };
         this.iLikeThis = function(ind, id){
@@ -406,8 +447,9 @@ console.log("frontend app app.js");
                     independentlikes: (this.posts[ind].independentlikes + 1)
                 }
             }).then(function(response){
-                console.log(response.data.likes);
-                console.log(response.data.independentlikes);
+                console.log('like total: ',response.data.likes);
+                console.log("independent likes: ",response.data.independentlikes);
+                this.reloadPosts();
             }.bind(this));
         };
 

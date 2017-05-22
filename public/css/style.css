@@ -147,12 +147,13 @@ button {
 .post-innards-right {
     margin: 4px;
     box-shadow: 1px 1px 3px black;
+    height: 100%;
 }
 .likeIt {
     display: flex;
     flex-direction: column;
-    height: 14.28%;
-    width: 20px;
+    height: 16.666%;
+    width: 100%;
     margin: 0;
 }
 .likeIt:hover {
