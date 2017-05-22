@@ -127,11 +127,12 @@ body {
     display: flex;
 }
 .line div{
-    height: 5px;
+    height: 7px;
     width: 16.666%;
 }
 .line div:hover{
     box-shadow: 4px 0px 10px darkgray;
+    cursor: pointer;
 }
 
 .panel-heading {
