@@ -48,7 +48,7 @@ button {
 }
 #single-post {
     text-align: left;
-    /*padding: 15px;*/
+    padding: 25px;
     border-top: .3px solid darkgray;
     border-bottom: .3px solid darkgray;
 
