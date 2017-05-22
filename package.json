@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/CapellaBlue/coders_app_frontend#readme",
   "dependencies": {
+    "angular-chart.js": "^1.1.1",
     "express": "^4.15.3"
   }
 }

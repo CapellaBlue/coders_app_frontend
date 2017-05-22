@@ -1,36 +1,59 @@
+
+/** {
+    border: 1px solid red;
+}*/
 body {
     background: white;
+    text-align: left;
+}
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
 }
 
 .navbar {
     background: #171837;
 }
-.jumbotron {
-    /*border-radius: 5px;*/
-}
-
-#jumbo-container {
-    margin-top: 40px;
-    margin-bottom: 5px;
+.navbar-brand:hover {
+    text-decoration: overline lightgray;
 }
 
 .posts {
     background : #EEEEEE;
     /*border-radius: 5px;*/
-    /*padding-top: 5px;
-    padding-bottom: 5px;*/
-    border-top: .3px solid darkgray;
-    margin-left: 5%;
-}
-#single-post {
     padding-top: 5px;
     padding-bottom: 5px;
     border-top: .3px solid darkgray;
-    margin-bottom: 5px;
+    border-bottom: .3px solid darkgray;
+    margin-left: 5%;
+}
+
+.post {
+    background : #EEEEEE;
+    /*border-radius: 5px;*/
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: .3px solid darkgray;
+    border-bottom: .3px solid darkgray;
+    margin-left: 4%;
+}
+
+.comment{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 4%;
+}
+#single-post {
+    text-align: left;
+    padding: 15px;
+    border-top: .3px solid darkgray;
+    border-bottom: .3px solid darkgray;
+    /*margin-bottom: 5px;*/
 }
 
 .row {
     background : #dbdbdb;
+    border-top: .3px solid darkgray;
+    border-bottom: .3px solid darkgray;
     /*border-radius: 5px;*/
     padding-top: 5px;
     padding-bottom: 5px;
@@ -46,21 +69,71 @@ body {
     padding: 4px;
     margin: 0 2px;
 }
+/*.hard-right:hover,.soft-left:hover,.soft-right:hover,.hard-left:hover,.centrist,.independent {
+
+}*/
 .hard-right {
     background: #B22234;
+    color: white;
 }
 .soft-left {
-    background: #A9B7C0;
+    background: #337AB7;
+    color: black;
 }
 .soft-right {
     background: #D27E87;
+    color: white;
 }
 .hard-left {
     background: #3C3B6E;
+    color: white;
 }
 .centrist {
-    background: #785d90;
+    background: #653776;
+    color: white;
 }
 .independent {
     background: #9c8914;
+    color: white;
+}
+
+.test {
+    background: white;
+}
+
+.carousel {
+    background : #EEEEEE;
+    border-top: .3px solid darkgray;
+    border-bottom: .3px solid darkgray;
+    padding: 4px;
+    margin-bottom: 10px;
+}
+
+.panel-body {
+    padding: 0;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 200px;
+    margin: 1% auto;
+}
+
+.navbar-brand {
+    font-size: 30px
+}
+
+.line {
+    display: flex;
+}
+.line div{
+    height: 5px;
+    width: 16.666%;
+}
+.line div:hover{
+    box-shadow: 4px 0px 10px darkgray;
+}
+
+.panel-heading {
+    background: rgba(0, 0, 0, 0);
 }
