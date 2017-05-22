@@ -364,7 +364,7 @@ console.log("frontend app app.js");
             $http({
                 method: 'PUT',
                 // url: 'http://localhost:3000/posts/'+ id,
-                     url : herokuURL+'daily_topics/'+tempId,
+                     url : 'https://typepolitik99.herokuapp.com/posts/' + id,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     hardRightLikes: (this.posts[ind].hardRightLikes + 1)
@@ -381,8 +381,8 @@ console.log("frontend app app.js");
             console.log(this.posts[ind].hardRightLikes);
             $http({
                 method: 'PUT',
-                url: 'http://localhost:3000/posts/'+ id,
-                // url : herokuURL+'daily_topics/'+tempId,
+                // url: 'http://localhost:3000/posts/'+ id,
+                url : 'https://typepolitik99.herokuapp.com/posts/' + id,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     softRightLikes: (this.posts[ind].softRightLikes + 1)
@@ -397,7 +397,7 @@ console.log("frontend app app.js");
             $http({
                 method: 'PUT',
                 // url: 'http://localhost:3000/posts/'+ id,
-                url : herokuURL+'daily_topics/'+tempId,
+                url : 'https://typepolitik99.herokuapp.com/posts/' + id,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     centristLikes: (this.posts[ind].centristLikes + 1)
@@ -412,7 +412,7 @@ console.log("frontend app app.js");
             $http({
                 method: 'PUT',
                 // url: 'http://localhost:3000/posts/'+ id,
-                url : herokuURL+'daily_topics/'+tempId,
+                url : 'https://typepolitik99.herokuapp.com/posts/' + id,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     softLeftLikes: (this.posts[ind].softLeftLikes + 1)
@@ -427,7 +427,7 @@ console.log("frontend app app.js");
             $http({
                 method: 'PUT',
                 // url: 'http://localhost:3000/posts/'+ id,
-                url : herokuURL+'daily_topics/'+tempId,
+                url : 'https://typepolitik99.herokuapp.com/posts/' + id,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     hardLeftLikes: (this.posts[ind].hardLeftLikes + 1)
@@ -442,7 +442,7 @@ console.log("frontend app app.js");
             $http({
                 method: 'PUT',
                 // url: 'http://localhost:3000/posts/'+ id,
-                url : herokuURL+'daily_topics/'+tempId,
+                url : 'https://typepolitik99.herokuapp.com/posts/' + id,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     independentlikes: (this.posts[ind].independentlikes + 1)
