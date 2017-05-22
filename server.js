@@ -1,6 +1,6 @@
 var express = require('express');
 var app     = express();
-var port    = 8000;
+var port = process.env.PORT || 8000;
 
 //dont need routes, but we do need a static folder
 
