@@ -6,6 +6,10 @@ body {
     background: white;
     text-align: left;
 }
+
+button {
+    background: darkgray;
+}
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
@@ -44,10 +48,10 @@ body {
 }
 #single-post {
     text-align: left;
-    padding: 15px;
+    /*padding: 15px;*/
     border-top: .3px solid darkgray;
     border-bottom: .3px solid darkgray;
-    /*margin-bottom: 5px;*/
+
 }
 
 .row {
@@ -69,9 +73,7 @@ body {
     padding: 4px;
     margin: 0 2px;
 }
-/*.hard-right:hover,.soft-left:hover,.soft-right:hover,.hard-left:hover,.centrist,.independent {
 
-}*/
 .hard-right {
     background: #B22234;
     color: white;
@@ -133,6 +135,41 @@ body {
 .line div:hover{
     box-shadow: 4px 0px 10px darkgray;
     cursor: pointer;
+}
+.post-innards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.post-innards-left{
+    padding: 25px;
+}
+.post-innards-right {
+    margin: 4px;
+    box-shadow: 1px 1px 3px black;
+}
+.likeIt {
+    display: flex;
+    flex-direction: column;
+    height: 14.28%;
+    width: 20px;
+    margin: 0;
+}
+.likeIt:hover {
+    cursor: pointer;
+}
+
+.total_likes{
+    background: lightgray;
+    color: black;
+    font-size: 20px;
+    font-weight: bolder;
+    cursor: default;
+}
+.total_likes,#hr,#sr,#c,#sl,#hl,#i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .panel-heading {

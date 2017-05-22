@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="js/ui-bootstrap-custom-tpls-2.5.0.js"></script>
-    <script src="node_modules/chart.js/Chart.min.js"></script>
-    <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <!-- <script src="node_modules/chart.js/Chart.min.js"></script> -->
+    <!-- <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script> -->
     <script type="text/javascript" src="js/app.js"></script>
 
     <title>TypePolitik</title>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <form ng-submit="ctrl.createComment(ctrl.viewPost.id)" class="form-horizontal">
+                    <form ng-submit="ctrl.createAffComment(ctrl.viewAffPost.id)" class="form-horizontal">
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <textarea class="form-control" rows="4"ng-model="ctrl.commentFormdata.text" placeholder="Comment"></textarea>
@@ -201,12 +201,37 @@
         </div>
         <!-- end posts by affiliation -->
 
-        <div ng-hide="ctrl.viewOnePost" ng-show="ctrl.showAllPosts" class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
+        <div ng-show="ctrl.showAllPosts" class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
             <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.posts" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
                 <div class="{{post.political_affiliation}}" id="single-post">
-                    <p>{{post.content}}</p>
-                    <button ng-click="ctrl.showPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
-
+                    <div class="post-innards">
+                        <div class="post-innards-left">
+                            <p>{{post.content}}</p>
+                            <button ng-click="ctrl.showPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
+                        </div>
+                        <div class="post-innards-right">
+                            <div class="likeIt total_likes">
+                                {{post.likes}}
+                            </div>
+                            <div ng-click="ctrl.hRLikeThis($index, post.id)" class="likeIt hard-right" id="hr">{{post.hardRightLikes}}</div>
+                            <div ng-click="ctrl.sRLikeThis($index, post.id)" class="likeIt soft-right" id="sr">{{post.softRightLikes}}</div>
+                            <div ng-click="ctrl.cLikeThis($index, post.id)" class="likeIt centrist" id="c">{{post.centristLikes}}</div>
+                            <div ng-click="ctrl.sLLikeThis($index, post.id)" class="likeIt soft-left" id="sl">{{post.softLeftLikes}}</div>
+                            <div ng-click="ctrl.hLLikeThis($index, post.id)" class="likeIt hard-left" id="hl">{{post.hardLeftLikes}}</div>
+                            <div ng-click="ctrl.iLikeThis($index, post.id)" class="likeIt independent" id="i">{{post.independentlikes}}</div>
+                        </div>
+                        <!-- <div ng-show="ctrl.clicked" class="post-innards-right">
+                            <div class="likeIt total_likes">
+                                {{post.likes}}
+                            </div>
+                            <div class="likeIt hard-right" id="hr"></div>
+                            <div class="likeIt soft-right"></div>
+                            <div class="likeIt centrist"></div>
+                            <div class="likeIt soft-left"></div>
+                            <div class="likeIt hard-left"></div>
+                            <div class="likeIt independent"></div>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>
