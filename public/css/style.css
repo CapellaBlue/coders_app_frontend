@@ -13,13 +13,8 @@ body {
 .navbar {
     background: #171837;
 }
-.jumbotron {
-    /*border-radius: 5px;*/
-}
-
-#jumbo-container {
-    margin-top: 40px;
-    margin-bottom: 5px;
+.navbar-brand:hover {
+    text-decoration: overline lightgray;
 }
 
 .posts {
@@ -74,12 +69,15 @@ body {
     padding: 4px;
     margin: 0 2px;
 }
+/*.hard-right:hover,.soft-left:hover,.soft-right:hover,.hard-left:hover,.centrist,.independent {
+
+}*/
 .hard-right {
     background: #B22234;
     color: white;
 }
 .soft-left {
-    background: #A9B7C0;
+    background: #337AB7;
     color: black;
 }
 .soft-right {
@@ -129,8 +127,11 @@ body {
     display: flex;
 }
 .line div{
-    height: 3px;
+    height: 5px;
     width: 16.666%;
+}
+.line div:hover{
+    box-shadow: 4px 0px 10px darkgray;
 }
 
 .panel-heading {

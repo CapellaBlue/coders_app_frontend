@@ -15,6 +15,23 @@ app.controller('mainController', ['$http', function($http){
     this.postFormdata = {};
     this.commentFormdata = {};
     this.affiliation = ["Hard Right", "Soft Right", "Centrist", "Soft Left", "Hard Left", "Independent"];
+    //display all of one type of affiliation
+    this.hardRight = [];
+    this.softRight = [];
+    this.centrist = [];
+    this.softLeft = [];
+    this.hardLeft = [];
+    this.independent = [];
+    this.hardR = false;
+    this.softR = false;
+    this.c = false;
+    this.softL = false;
+    this.hardL = false;
+    this.i = false;
+    //affiliation join discussion
+    this.viewAffPost = {};
+    this.postAffComments = [];
+    this.viewOneAffPost = false;
 
     // GET All Posts
     $http({
@@ -24,33 +41,48 @@ app.controller('mainController', ['$http', function($http){
         },
         url: 'https://typepolitik99.herokuapp.com/posts'
     }).then(function(response){
-
         this.posts = response.data;
-        console.log(this.posts[1]);
+        console.log(response.data);
         for (var i = 0; i < response.data.length; i++) {
             var aff = response.data[i].political_affiliation;
 
             if(aff == "Hard Right"){
+                this.hardRight.push(response.data[i]);
+                console.log(this.hardRight);
                 response.data[i].political_affiliation = "hard-right";
             } else if(aff == "Soft Right"){
+                this.softRight.push(response.data[i]);
                 response.data[i].political_affiliation = "soft-right";
             } else if(aff == "Hard Left"){
+                this.hardLeft.push(response.data[i]);
                 response.data[i].political_affiliation = "hard-left";
             } else if(aff == "Soft Left"){
+                this.softLeft.push(response.data[i]);
                 response.data[i].political_affiliation = "soft-left";
             } else if(aff == "Centrist"){
+                this.centrist.push(response.data[i]);
                 response.data[i].political_affiliation = "centrist";
             } else if(aff == "Independent"){
+                this.independent.push(response.data[i]);
                 response.data[i].political_affiliation = "independent";
             };
-            // console.log(aff);
-            // console.log(response.data[i].political_affiliation);
         };
     }.bind(this));
 
     // See one Post and its Comments
-    this.showPostComments = function(post_id, ind){
+    this.showPostComments = function(post_id, ind, aff){
+        console.log(post_id);
+        console.log(ind);
+        console.log(aff);
       this.viewPost = this.posts[ind];
+
+      this.showAllPosts = false;
+      this.hardR = false;
+      this.softR = false;
+      this.c = false;
+      this.softL = false;
+      this.hardL = false;
+      this.i = false;
       $http({
           method: 'GET',
           headers: {
@@ -58,12 +90,11 @@ app.controller('mainController', ['$http', function($http){
           },
           url: 'https://typepolitik99.herokuapp.com/posts/'+post_id
       }).then(function(response){
-        //   console.log(response.data.comments);
+          console.log(response.data);
         this.postComments = response.data.comments;
         this.viewOnePost = true;
         for (var i = 0; i < response.data.comments.length; i++) {
             var aff = response.data.comments[i].political_affiliation;
-
             if(aff == "Hard Right"){
                 response.data.comments[i].political_affiliation = "hard-right";
             } else if(aff == "Soft Right"){
@@ -77,8 +108,61 @@ app.controller('mainController', ['$http', function($http){
             } else if(aff == "Independent"){
                 response.data.comments[i].political_affiliation = "independent";
             };
-            // console.log(aff);
-            // console.log(response.data.comments[i].political_affiliation);
+        };
+      }.bind(this));
+    };
+
+
+    this.showAffPostComments = function(post_id, ind, aff){
+        console.log(post_id);
+        console.log(ind);
+        console.log(aff);
+        this.reset();
+        this.showAllPosts = false;
+        this.viewOneAffPost = true;
+        if(aff == "hard-right"){
+            this.viewAffPost = this.hardRight[ind];
+            console.log(this.viewAffPost);
+        } else if(aff == "soft-right"){
+            this.viewAffPost = this.softRight[ind];
+        } else if(aff == "hard-left"){
+            this.viewAffPost = this.hardLeft[ind];
+        } else if(aff == "soft-left"){
+            this.viewAffPost = this.softLeft[ind];
+        } else if(aff == "centrist"){
+            this.viewAffPost = this.centrist[ind];
+        } else if(aff == "independent"){
+            this.viewAffPost = this.independent[ind];
+        };
+        // this.viewAffPost = this.posts[ind];
+        console.log(this.viewAffPost);
+    //   this.viewAffPost = this.posts[ind];
+      $http({
+          method: 'GET',
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          url: 'https://typepolitik99.herokuapp.com/posts/'+post_id
+      }).then(function(response){
+          console.log(response.data.comments);
+        this.postAffComments = response.data.comments;
+        this.viewOneAffPost = true;
+
+        for (var i = 0; i < response.data.comments.length; i++) {
+            var aff = response.data.comments[i].political_affiliation;
+            if(aff == "Hard Right"){
+                response.data.comments[i].political_affiliation = "hard-right";
+            } else if(aff == "Soft Right"){
+                response.data.comments[i].political_affiliation = "soft-right";
+            } else if(aff == "Hard Left"){
+                response.data.comments[i].political_affiliation = "hard-left";
+            } else if(aff == "Soft Left"){
+                response.data.comments[i].political_affiliation = "soft-left";
+            } else if(aff == "Centrist"){
+                response.data.comments[i].political_affiliation = "centrist";
+            } else if(aff == "Independent"){
+                response.data.comments[i].political_affiliation = "independent";
+            };
         };
       }.bind(this));
     };
@@ -125,11 +209,64 @@ app.controller('mainController', ['$http', function($http){
             this.postComments.unshift(result.data);
         }.bind(this));
     };
+    //display all
+    this.displayHR = function(){
+        this.reset();
+        this.showAllPosts = false;
+        this.hardR = true;
+    };
+    this.displaySR = function(){
+        console.log("clicked");
+        this.reset();
+        this.showAllPosts = false;
+        this.softR = true;
+    };
+    this.displayC = function(){
+        console.log("clicked");
+        this.reset();
+        this.showAllPosts = false;
+        this.c = true;
+    };
+    this.displaySL = function(){
+        console.log("clicked");
+        this.reset();
+        this.showAllPosts = false;
+        this.softL = true;
+    };
+    this.displayHL = function(){
+        console.log("clicked");
+        this.reset();
+        this.showAllPosts = false;
+        this.hardL = true;
+    };
+    this.displayI = function(){
+        console.log("clicked");
+        this.reset();
+        this.showAllPosts = false;
+        this.i = true;
+        // this.hardR = false;
+        // this.softR = false;
+        // this.c = false;
+        // this.softL = false;
+        // this.hardL = false;
+        // this.i = true;
+        // this.showAllPosts = false;
+        // this.viewOnePost = false;
+        // this.showContent = false;
+    };
 //reset page to "home"
     this.reset = function(){
+        console.log("clicked");
         this.showAllPosts = true;
         this.viewOnePost = false;
         this.showContent = false;
+        this.hardR = false;
+        this.softR = false;
+        this.c = false;
+        this.softL = false;
+        this.hardL = false;
+        this.i = false;
+        this.viewOneAffPost = false;
     };
     //===========ACCORDIAN===========//
     this.oneAtATime = true;
@@ -165,28 +302,5 @@ app.controller('mainController', ['$http', function($http){
         };
         console.log(this.slides);
     }.bind(this));
-
-//   function generateIndexesArray() {
-//     var indexes = [];
-//     for (var i = 0; i < currIndex; ++i) {
-//       indexes[i] = i;
-//     }
-//     return shuffle(indexes);
-//   }
-//
-//   function shuffle(array) {
-//     var tmp, current, top = array.length;
-//
-//     if (top) {
-//       while (--top) {
-//         current = Math.floor(Math.random() * (top + 1));
-//         tmp = array[current];
-//         array[current] = array[top];
-//         array[top] = tmp;
-//       }
-//     }
-//
-//     return array;
-// };
 
 }]);

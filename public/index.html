@@ -14,18 +14,18 @@
     <div class="navbar-wrapper">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" ng-click="ctrl.reset()">TypeP<span style="color:#B22234">o</span><span style="color:#A9B7C0">l</span><span style="color:#D27E87">i</span><span style="color:#3C3B6E">t</span><span style="color:#653776">i</span><span style="color:#9c8914">k</span></a>
+                <a class="navbar-brand" ng-click="ctrl.reset()"><span style="color:black">Type</span>P<span style="color:#B22234">o</span><span style="color:#A9B7C0">l</span><span style="color:#D27E87">i</span><span style="color:#3C3B6E">t</span><span style="color:#653776">i</span><span style="color:#9c8914">k</span></a>
             </div>
         </div>
 
     </div>
     <div class="line">
-        <div class="hard-right"></div>
-        <div class="soft-left"></div>
-        <div class="soft-right"></div>
-        <div class="hard-left"></div>
-        <div class="centrist"></div>
-        <div class="independent"></div>
+        <div ng-click="ctrl.displayHR()" class="hard-right"></div>
+        <div ng-click="ctrl.displaySL()" class="soft-left"></div>
+        <div ng-click="ctrl.displaySR()" class="soft-right"></div>
+        <div ng-click="ctrl.displayHL()" class="hard-left"></div>
+        <div ng-click="ctrl.displayC()" class="centrist"></div>
+        <div ng-click="ctrl.displayI()" class="independent"></div>
     </div>
     <main class="container">
         <div ng-show="ctrl.viewOnePost" class="row">
@@ -71,73 +71,185 @@
                 </div>
             </div>
         </div>
-        <script type="text/ng-template" id="group-template.html">
-            <div class="panel-heading {{post.political_affiliation}}">
-              <h4 class="panel-title {{post.political_affiliation}}" style="background: {{post.political_affiliation}}">
-                <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
-                  <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+        <!-- ================================ -->
+        <!-- more affiliation things -->
+        <!-- ================================ -->
+        <div ng-show="ctrl.viewOneAffPost" class="row">
+            <div class="post col-xs-11 col-sm-11 col-md-11 col-lg-11 {{ctrl.viewAffPost.political_affiliation}}">
+                <h3>{{ctrl.viewAffPost.title}}</h3>
+                <p>{{ctrl.viewAffPost.content}}</p>
+                <small>{{ctrl.viewAffPost.author}}</small>
+            </div>
+            <div class="post col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                <!-- YOU ARE HERE -->
+                <div ng-repeat="comment in ctrl.postAffComments" class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 comment">
+                    </div>
+
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 post {{comment.political_affiliation}}">
+                        <p>{{comment.text}}</p>
+                        <small>By {{comment.author}}</small>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form ng-submit="ctrl.createComment(ctrl.viewPost.id)" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="4"ng-model="ctrl.commentFormdata.text" placeholder="Comment"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input ng-model="ctrl.commentFormdata.author" type="text" placeholder="Author">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <select ng-model="ctrl.commentFormdata.political_affiliation" ng-options="x for x in ctrl.affiliation">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2 col-sm-10">
+                                <input type="submit" placeholder="Submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+<script type="text/ng-template" id="group-template.html">
+    <div class="panel-heading {{post.political_affiliation}}">
+        <h4 class="panel-title {{post.political_affiliation}}" style="background: {{post.political_affiliation}}">
+            <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+                <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
                     {{heading}}
-                  </span>
-                </a>
-              </h4>
-            </div>
-            <div class="panel-collapse collapse" uib-collapse="!isOpen">
-              <div class="panel-body" style="text-align: right" ng-transclude></div>
-            </div>
-          </script>
-          <uib-accordion close-others="oneAtATime">
-            <div  class="row">
-            <div ng-hide="ctrl.viewOnePost" ng-show="ctrl.showAllPosts" class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
-                <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.posts" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
+                </span>
+            </a>
+        </h4>
+    </div>
+    <div class="panel-collapse collapse" uib-collapse="!isOpen">
+        <div class="panel-body" style="text-align: right" ng-transclude></div>
+    </div>
+</script>
+<uib-accordion close-others="oneAtATime">
+    <div  class="row">
+        <!-- start posts by affiliation -->
+        <div ng-show="ctrl.hardR" ng-click="displayHR()">
+            <div class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
+                <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.hardRight" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
                     <div class="{{post.political_affiliation}}" id="single-post">
                         <p>{{post.content}}</p>
-                        <button ng-click="ctrl.showPostComments(post.id, $index)">Join Discussion</button>
-
+                        <button ng-click="ctrl.showAffPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
                     </div>
                 </div>
             </div>
-
-            <div ng-hide="ctrl.viewOnePost" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                <div>
-                    <div style="height: 125px" uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" >
-                      <div uib-slide ng-repeat="slide in ctrl.slides track by slide.id" index="slide.id">
-                        <h1 class="carousel_text"style="font-size: 1em">{{slide.text}}</h1>
-                      </div>
+        </div>
+        <div ng-show="ctrl.softR" ng-click="displaySR()">
+            <div class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
+                <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.softRight" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
+                    <div class="{{post.political_affiliation}}" id="single-post">
+                        <p>{{post.content}}</p>
+                        <button ng-click="ctrl.showAffPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
                     </div>
-                  </div>
-                <form ng-submit="ctrl.createPost()" class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <input ng-model="ctrl.postFormdata.title" type="text" placeholder="Title">
-                        </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="ctrl.c" ng-click="displayC()" >
+            <div class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
+                <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.centrist" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
+                    <div class="{{post.political_affiliation}}" id="single-post">
+                        <p>{{post.content}}</p>
+                        <button ng-click="ctrl.showAffPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <textarea class="form-control" rows="4"ng-model="ctrl.postFormdata.content" placeholder="Content"></textarea>
-                        </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="ctrl.softL" ng-click="displaySL()">
+            <div class="posts col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.softLeft" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
+                    <div class="{{post.political_affiliation}}" id="single-post">
+                        <p>{{post.content}}</p>
+                        <button ng-click="ctrl.showAffPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <input ng-model="ctrl.postFormdata.author" type="text" placeholder="Author">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <select ng-model="ctrl.postFormdata.political_affiliation" ng-options="x for x in ctrl.affiliation">
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2 col-sm-10">
-                            <input type="submit" placeholder="Submit">
-                        </div>
-                    </div>
-                </form>
+                </div>
 
             </div>
         </div>
+        <div ng-show="ctrl.hardL" ng-click="displayHL()">
+            <div class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
+                <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.hardLeft" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
+                    <div class="{{post.political_affiliation}}" id="single-post">
+                        <p>{{post.content}}</p>
+                        <button ng-click="ctrl.showAffPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="ctrl.i" ng-click="displayI()" >
+            <div class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
+                <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.independent" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
+                    <div class="{{post.political_affiliation}}" id="single-post">
+                        <p>{{post.content}}</p>
+                        <button ng-click="ctrl.showAffPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end posts by affiliation -->
+
+        <div ng-hide="ctrl.viewOnePost" ng-show="ctrl.showAllPosts" class="posts col-xs-11 col-sm-7 col-md-7 col-lg-7">
+            <div uib-accordion-group class=" panel-default" ng-repeat="post in ctrl.posts" heading="{{post.title}} - posted by: {{post.author}}" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" template-url="group-template.html" style="border: {{post.political_affiliation}}">
+                <div class="{{post.political_affiliation}}" id="single-post">
+                    <p>{{post.content}}</p>
+                    <button ng-click="ctrl.showPostComments(post.id, $index, post.political_affiliation)">Join Discussion</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div ng-hide="ctrl.viewOnePost" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div>
+                <div style="height: 125px" uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" >
+                    <div uib-slide ng-repeat="slide in ctrl.slides track by slide.id" index="slide.id">
+                        <h1 class="carousel_text"style="font-size: 1em">{{slide.text}}</h1>
+                    </div>
+                </div>
+            </div>
+            <form ng-submit="ctrl.createPost()" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input ng-model="ctrl.postFormdata.title" type="text" placeholder="Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea class="form-control" rows="4"ng-model="ctrl.postFormdata.content" placeholder="Content"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input ng-model="ctrl.postFormdata.author" type="text" placeholder="Author">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <select ng-model="ctrl.postFormdata.political_affiliation" ng-options="x for x in ctrl.affiliation">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2 col-sm-10">
+                        <input type="submit" placeholder="Submit">
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
+</div>
 </div>
 </main>
 <footer>
