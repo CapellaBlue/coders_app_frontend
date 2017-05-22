@@ -43,8 +43,8 @@ console.log("frontend app app.js");
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
             },
-            // url: 'https://typepolitik99.herokuapp.com/posts'
-            url: 'http://localhost:3000/posts'
+            url: 'https://typepolitik99.herokuapp.com/posts'
+            // url: 'http://localhost:3000/posts'
         }).then(function(response){
             this.posts = response.data;
             console.log('get all posts',response.data);
@@ -78,8 +78,8 @@ console.log("frontend app app.js");
                 headers: {
                     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                 },
-                // url: 'https://typepolitik99.herokuapp.com/posts'
-                url: 'http://localhost:3000/posts'
+                url: 'https://typepolitik99.herokuapp.com/posts'
+                // url: 'http://localhost:3000/posts'
             }).then(function(response){
                 this.posts = response.data;
                 console.log('get all posts',response.data);
@@ -119,8 +119,8 @@ console.log("frontend app app.js");
                 headers: {
                     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                 },
-                // url: 'https://typepolitik99.herokuapp.com/posts/'+post_id
-                url: 'http://localhost:3000/posts/'+ post_id
+                url: 'https://typepolitik99.herokuapp.com/posts/'+post_id
+                // url: 'http://localhost:3000/posts/'+ post_id
             }).then(function(response){
                 console.log('showPostComments',response.data);
                 this.postComments = response.data.comments;
@@ -167,8 +167,8 @@ console.log("frontend app app.js");
                 headers: {
                     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                 },
-                // url: 'https://typepolitik99.herokuapp.com/posts/'+post_id
-                url: 'http://localhost:3000/posts/'+post_id
+                url: 'https://typepolitik99.herokuapp.com/posts/'+post_id
+                // url: 'http://localhost:3000/posts/'+post_id
             }).then(function(response){
                 console.log('showAffPostComments',response.data.comments);
                 this.postAffComments = response.data.comments;
@@ -199,8 +199,8 @@ console.log("frontend app app.js");
             console.log(this.postFormData);
             $http({
                 method: 'POST',
-                // url: 'https://typepolitik99.herokuapp.com/posts',
-                url: 'http://localhost:3000/posts',
+                url: 'https://typepolitik99.herokuapp.com/posts',
+                // url: 'http://localhost:3000/posts',
                 data: this.postFormdata
             }).then(function(response){
                 console.log('Data from server: ', response);
@@ -227,8 +227,8 @@ console.log("frontend app app.js");
             console.log("inside createComment: ", this.commentFormdata);
             $http({
                 method: 'POST',
-                // url: 'https://typepolitik99.herokuapp.com/posts/' + post_id + '/comments',
-                url: 'http://localhost:3000/posts/' + post_id + '/comments',
+                url: 'https://typepolitik99.herokuapp.com/posts/' + post_id + '/comments',
+                // url: 'http://localhost:3000/posts/' + post_id + '/comments',
                 data: this.commentFormdata
             }).then(function(response){
                 console.log('Data from server: ', response);
@@ -256,8 +256,8 @@ console.log("frontend app app.js");
             console.log("inside createAffComment: ", this.commentFormdata);
             $http({
                 method: 'POST',
-                // url: 'https://typepolitik99.herokuapp.com/posts/' + post_id + '/comments',
-                url: 'http://localhost:3000/posts/' + post_id + '/comments',
+                url: 'https://typepolitik99.herokuapp.com/posts/' + post_id + '/comments',
+                // url: 'http://localhost:3000/posts/' + post_id + '/comments',
                 data: this.commentFormdata
             }).then(function(response){
                 console.log('Data from server: ', response);
@@ -343,8 +343,8 @@ console.log("frontend app app.js");
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
             },
-            // url: 'https://typepolitik99.herokuapp.com/daily_topics'
-            url: 'http://localhost:3000/daily_topics'
+            url: 'https://typepolitik99.herokuapp.com/daily_topics'
+            // url: 'http://localhost:3000/daily_topics'
         }).then(function(response){
             console.log('daily topic: ', response.data);
             for (var i = 0; i < response.data.length; i++) {
@@ -363,8 +363,8 @@ console.log("frontend app app.js");
             // this.clicked = true;
             $http({
                 method: 'PUT',
-                url: 'http://localhost:3000/posts/'+ id,
-                     // url : herokuURL+'daily_topics/'+tempId,
+                // url: 'http://localhost:3000/posts/'+ id,
+                     url : herokuURL+'daily_topics/'+tempId,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     hardRightLikes: (this.posts[ind].hardRightLikes + 1)
@@ -372,6 +372,7 @@ console.log("frontend app app.js");
             }).then(function(response){
                 console.log('like total: ',response.data.likes);
                 console.log('hard right likes: ', response.data.hardRightLikes);
+
                 this.reloadPosts();
             }.bind(this));
         };
@@ -395,8 +396,8 @@ console.log("frontend app app.js");
         this.cLikeThis = function(ind, id){
             $http({
                 method: 'PUT',
-                url: 'http://localhost:3000/posts/'+ id,
-                // url : herokuURL+'daily_topics/'+tempId,
+                // url: 'http://localhost:3000/posts/'+ id,
+                url : herokuURL+'daily_topics/'+tempId,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     centristLikes: (this.posts[ind].centristLikes + 1)
@@ -410,8 +411,8 @@ console.log("frontend app app.js");
         this.sLLikeThis = function(ind, id){
             $http({
                 method: 'PUT',
-                url: 'http://localhost:3000/posts/'+ id,
-                // url : herokuURL+'daily_topics/'+tempId,
+                // url: 'http://localhost:3000/posts/'+ id,
+                url : herokuURL+'daily_topics/'+tempId,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     softLeftLikes: (this.posts[ind].softLeftLikes + 1)
@@ -425,8 +426,8 @@ console.log("frontend app app.js");
         this.hLLikeThis = function(ind, id){
             $http({
                 method: 'PUT',
-                url: 'http://localhost:3000/posts/'+ id,
-                // url : herokuURL+'daily_topics/'+tempId,
+                // url: 'http://localhost:3000/posts/'+ id,
+                url : herokuURL+'daily_topics/'+tempId,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     hardLeftLikes: (this.posts[ind].hardLeftLikes + 1)
@@ -440,8 +441,8 @@ console.log("frontend app app.js");
         this.iLikeThis = function(ind, id){
             $http({
                 method: 'PUT',
-                url: 'http://localhost:3000/posts/'+ id,
-                // url : herokuURL+'daily_topics/'+tempId,
+                // url: 'http://localhost:3000/posts/'+ id,
+                url : herokuURL+'daily_topics/'+tempId,
                 data: {
                     likes: (this.posts[ind].likes + 1),
                     independentlikes: (this.posts[ind].independentlikes + 1)
