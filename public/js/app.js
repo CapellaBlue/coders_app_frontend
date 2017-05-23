@@ -227,8 +227,7 @@ console.log("frontend app app.js");
             this.postFormData.softLeftLikes = 0;
             this.postFormData.hardLeftLikes = 0;
             this.postFormData.independentlikes = 0;
-            console.log(this.postFormData.);
-            console.log(this.postFormData);
+            
             $http({
                 method: 'POST',
                 url: 'https://typepolitik99.herokuapp.com/posts',
