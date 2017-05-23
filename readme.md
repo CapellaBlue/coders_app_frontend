@@ -13,3 +13,4 @@ bootstrap, and angular UI for bootstrap and is written using HTML, CSS, and Java
 Notes to self:
 I'd really like to add charts.js to the site to visually inspect all the interesting data coming from the users.
 Further, figuring out how to make accordian functionality with angular UI for Bootstrap do my bidding would be stellar."
+dfd
