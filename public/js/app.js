@@ -128,7 +128,6 @@ console.log("frontend app app.js");
                         this.independent.push(response.data[i]);
                         response.data[i].political_affiliation = "independent";
                     };
-
                 };
             }.bind(this));
         };
@@ -228,6 +227,7 @@ console.log("frontend app app.js");
             this.postFormData.softLeftLikes = 0;
             this.postFormData.hardLeftLikes = 0;
             this.postFormData.independentlikes = 0;
+            console.log(this.postFormData.);
             console.log(this.postFormData);
             $http({
                 method: 'POST',
