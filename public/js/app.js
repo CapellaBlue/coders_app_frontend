@@ -221,13 +221,13 @@ console.log("frontend app app.js");
         //create POST route
         this.createPost = function(){
             this.postFormdata.likes = 0;
-            this.postFormData.hardRightLikes = 0;
-            this.postFormData.softRightLikes = 0;
-            this.postFormData.centrist = 0;
-            this.postFormData.softLeftLikes = 0;
-            this.postFormData.hardLeftLikes = 0;
-            this.postFormData.independentlikes = 0;
-            
+            this.postFormdata.hardRightLikes = 0;
+            this.postFormdata.softRightLikes = 0;
+            this.postFormdata.centrist = 0;
+            this.postFormdata.softLeftLikes = 0;
+            this.postFormdata.hardLeftLikes = 0;
+            this.postFormdata.independentlikes = 0;
+
             $http({
                 method: 'POST',
                 url: 'https://typepolitik99.herokuapp.com/posts',
